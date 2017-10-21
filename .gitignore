@@ -1,0 +1,8 @@
+node_modules/
+.tmp/
+*.log
+.env
+*.pid
+*.seed
+package-lock.json
+yarn.lock
