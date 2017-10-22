@@ -4,6 +4,6 @@ export default class ProjectsService {
   }
 
   getProjects() {
-    return this.$http.get('https://raw.githubusercontent.com/PokemonGOAPI/PokemonDataGraber/master/output.json')
+    return this.$http.get('/api/v1/projects')
   }
 }

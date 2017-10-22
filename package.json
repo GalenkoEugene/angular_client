@@ -7,14 +7,20 @@
     "aggregateTimeout": 100
   },
   "scripts": {
-    "start": "concurrently 'webpack-dev-server' 'webpack --watch'"
+    "start": "concurrently 'webpack-dev-server' 'webpack --watch'",
+    "build": "webpack --config webpack.prod.config.js"
+  },
+  "devServer": {
+    "stats": "errors-only"
   },
   "author": "Eugene",
   "license": "ISC",
   "dependencies": {
     "angular": "^1.6.6",
+    "angular-cookie": "^4.1.0",
     "angular-ui-router": "^0.4.3",
-    "webpack": "^3.8.1"
+    "angularjs-rails-resource": "^2.2.2",
+    "ng-token-auth": "^0.0.30"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -22,6 +28,7 @@
     "babel-preset-es2015": "^6.24.1",
     "concurrently": "^3.5.0",
     "html-loader": "^0.5.1",
+    "webpack": "^3.8.1",
     "webpack-dev-server": "^2.9.3"
   }
 }
