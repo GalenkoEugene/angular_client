@@ -1,7 +1,9 @@
+var path = require('path');
+
 module.exports = {
     entry: './app/app.module.js',
     output: {
-        path: './bin',
+        path: path.join(__dirname, 'bin'),
         filename: 'app.bundle.js',
     },
     module: {
@@ -11,7 +13,7 @@ module.exports = {
             exclude: /node_modules/,
             loader: 'babel-loader',
         },
-        { test: /\.html$/, loader: "html" },
+        { test: /\.html$/, loader: "html-loader" },
         { test: /\.css$/, loader: "style!css" }
       ]
     },
