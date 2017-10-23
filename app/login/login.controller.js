@@ -1,6 +1,5 @@
-
 export default class LoginCtrl {
-  constructor($rootScope, $auth, $cookies) {
+  constructor($auth, $cookies, $location) {
 
   }
 

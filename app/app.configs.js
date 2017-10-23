@@ -1,4 +1,6 @@
-export default function configs($authProvider) {
+export default function configs($authProvider, $qProvider) {
+  $qProvider.errorOnUnhandledRejections(false);
+
   $authProvider.configure({
     apiUrl:                  '/api/v1',
     tokenValidationPath:     '/auth/validate_token',
@@ -29,7 +31,7 @@ export default function configs($authProvider) {
       expires: 9999,
       expirationUnit: 'days',
       secure: false,
-      domain: 'http://localhost:3000'
+      domain: 'localhost'
     },
     createPopup: function(url) {
       return window.open(url, '_blank', 'closebuttoncaption=Cancel');

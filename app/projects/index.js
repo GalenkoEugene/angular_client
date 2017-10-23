@@ -2,7 +2,6 @@
 
 import angular from 'angular'
 import uirouter from 'angular-ui-router'
-
 import routes from './projects.routes.js'
 import projectList from './project-list/project-list.component'
 import ProjectsService from './projects.service'
