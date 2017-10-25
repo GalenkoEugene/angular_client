@@ -1,17 +1,21 @@
 export default class SignUpCtrl {
-  constructor($auth, $cookies, $location) { 'ngInject';
+  constructor($auth, $cookies, $location, $scope) { 'ngInject';
     this.$cookies = $cookies;
     this.$location = $location;
-    // this.redirectUser();
+    this.$scope = $scope;
+    this.call();
   }
 
-  // TODO on events
+  call(){
+    this.$scope.$on('auth:registration-email-success', (ev, message) => {
+      alert("You've successfully registered.")
+      this.$location.path('/')
+    });
 
-  redirectUser() {
-    if (!!this.$cookies.get('auth_headers')) {
-      this.$location.path('/');
-    } else {
-      this.$location.path('/login');
-    }
+    this.$scope.$on('auth:registration-email-error', (ev, reason) => {
+      angular.forEach(reason.errors.full_messages, (value, index) => {
+        alert(value)
+      })
+    });
   }
 }
