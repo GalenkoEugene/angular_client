@@ -22,6 +22,7 @@
     "angular-ui-router": "^0.4.3",
     "angularjs-rails-resource": "^2.2.2",
     "bootstrap": "^3.3.7",
+    "ng-annotate-webpack-plugin": "^0.2.1-pre",
     "ng-token-auth": "^0.0.30"
   },
   "devDependencies": {
@@ -30,9 +31,12 @@
     "babel-preset-es2015": "^6.24.1",
     "concurrently": "^3.5.0",
     "css-loader": "^0.28.7",
+    "extract-text-webpack-plugin": "^3.0.1",
     "file-loader": "^1.1.5",
     "html-loader": "^0.5.1",
     "jquery": "^3.2.1",
+    "node-sass": "^4.5.3",
+    "sass-loader": "^6.0.6",
     "style-loader": "^0.19.0",
     "url-loader": "^0.6.2",
     "webpack": "^3.8.1",

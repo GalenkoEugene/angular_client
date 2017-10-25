@@ -1,5 +1,5 @@
 export default class ProjectsService {
-  constructor($http) {
+  constructor($http) { 'ngInject';
     this.$http = $http
   }
 

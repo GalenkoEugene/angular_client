@@ -1,5 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
+const ngAnnotatePlugin = require('ng-annotate-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
   entry: "./app/app.module.js",
@@ -10,23 +12,26 @@ module.exports = {
   },
 
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: "babel-loader",
+        use: "babel-loader",
       },
       { 
         test: /\.html$/, 
-        loader: "html-loader" 
+        use: "html-loader" 
       },
       { 
-        test: /\.css$/, 
-        loader: "style-loader!css-loader" 
+        test: /\.(css|scss|sass)$/, 
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', 'sass-loader']
+        }) 
       },
       { 
         test: /\.(png|woff|woff2|eot|ttf|svg)$/, 
-        loader: "url-loader?limit=100000" 
+        use: "url-loader?limit=100000" 
       }
     ]
   },
@@ -44,8 +49,14 @@ module.exports = {
 
   plugins: [
     new webpack.ProvidePlugin({
-     $: "jquery",
-     jQuery: "jquery"
-    })
+      $: "jquery",
+      jQuery: "jquery"
+    }),
+
+    new ngAnnotatePlugin({
+      add: true
+    }),
+
+    new ExtractTextPlugin('style.css')
   ]
 }

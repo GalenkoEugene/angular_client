@@ -1,0 +1,37 @@
+@mixin glyphicon-size{
+  font-size: 25px;
+}
+
+@mixin default {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14pt;
+  margin-left: auto;
+  margin-top: 50px;
+}
+
+body>div.container{
+  margin-top: 100px;
+}
+
+.glyphicon-log-in{
+  @include glyphicon-size
+}
+
+.glyphicon-log-out{
+  @include glyphicon-size
+}
+
+.form-block {
+  max-width: 400px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.form-helper {
+  margin-top: 10px;
+  font-weight: 200;
+}

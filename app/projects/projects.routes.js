@@ -1,10 +1,12 @@
-routes.$inject = ['$stateProvider'];
-export default function routes($stateProvider) {
+export default function routes($stateProvider) { 'ngInject';
   $stateProvider
   .state('projects', {
     url: '/',
     template: require('./projects.html'),
     resolve: {
+      auth: ['$auth',($auth) => { 
+        return $auth.validateUser()
+      }],
       projects: ['ProjectsService', (ProjectsService) => {
         return ProjectsService.getProjects()
       }]

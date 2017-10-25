@@ -1,4 +1,4 @@
-export default function configs($authProvider, $qProvider) {
+export default function configs($authProvider, $qProvider) { 'ngInject';
   $qProvider.errorOnUnhandledRejections(false);
 
   $authProvider.configure({

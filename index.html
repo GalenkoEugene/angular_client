@@ -4,8 +4,21 @@
   <meta charset="UTF-8">
   <title>TodoList</title>
   <script src="bin/app.bundle.js"></script>
+  <link rel='stylesheet' href='bin/style.css'>
 </head>
 <body>
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Ruby Garage</a>
+        Simple ToDo List
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#" ng-click="signOut()" ng-if="user.signedIn"><span class="glyphicon glyphicon-log-out"></span></a></li>
+        <li><a href="#/login" ng-if="!user.signedIn"><span class="glyphicon glyphicon-log-in"></span></a></li>
+      </ul>
+    </div>
+  </nav>
+
   <div class="container">
     <div ui-view></div>
   </div>

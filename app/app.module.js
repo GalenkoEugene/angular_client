@@ -1,4 +1,4 @@
-// require('bootstrap')
+import './scss/base.scss';
 import 'bootstrap/dist/css/bootstrap.css'
 import angular from 'angular'
 import ipCookie from 'angular-cookie'
