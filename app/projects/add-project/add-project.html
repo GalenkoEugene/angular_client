@@ -1,0 +1,9 @@
+<form ng-submit="createProject(projectName)">
+  <div class="form-group form-group">
+    <input ng-model="projectName" ng-click="showForm=true" type="text" class="form-control" placeholder="Enter Project Name ...">
+  </div>
+  <div ng-show="showForm">
+    <button type="submit" class="btn btn-info">Create Project</button>
+    <button class="btn btn-light" ng-click="showForm=false">Cancel</button>
+  </div>
+</form>

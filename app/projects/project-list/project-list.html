@@ -1,3 +1,23 @@
-<ul>
-  <li ng-repeat="project in projectListCtrl.projects">{{project.name}}</li>
-</ul>
+
+<div class="panel-group">
+  <div class="panel panel-default">
+    
+    <div class="panel-heading">
+      <div class="row">
+        <div class="col-md-1"><span class="glyphicon glyphicon-triangle-right"></span></div>
+        <div class="col-md-9">Owesome project name</div>
+        <div class="col-md-2">
+          <span class="glyphicon glyphicon-pencil"></span>
+          <span class="glyphicon glyphicon-trash"></span>
+        </div>
+      </div> 
+    </div>
+  </div>
+
+  <div class="panel panel-default" ng-repeat="project in projectListCtrl.projects">
+    <div class="panel-heading"> {{project.name}} </div>
+    <div class="panel-body"> here will be tasks </div>
+    <div class="panel-body"> here will be tasks </div>
+    <div class="panel-body"> here will be tasks </div>
+  </div>
+</div>

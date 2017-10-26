@@ -1,5 +1,6 @@
 import './scss/base.scss';
-import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/npm.js';
 import angular from 'angular'
 import ipCookie from 'angular-cookie'
 import uirouter from 'angular-ui-router'
@@ -10,7 +11,6 @@ import ngCookies from 'angular-cookies'
 import projects from './projects'
 import login from './login'
 import signup from './signup'
-
 
 angular.module('TodoList', [
   uirouter,

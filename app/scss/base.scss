@@ -1,4 +1,4 @@
-@mixin glyphicon-size{
+@mixin glyphicon-size {
   font-size: 25px;
 }
 
@@ -11,15 +11,15 @@
   margin-top: 50px;
 }
 
-body>div.container{
+body>div.container {
   margin-top: 100px;
 }
 
-.glyphicon-log-in{
+.glyphicon-log-in {
   @include glyphicon-size
 }
 
-.glyphicon-log-out{
+.glyphicon-log-out {
   @include glyphicon-size
 }
 
@@ -34,4 +34,19 @@ body>div.container{
 .form-helper {
   margin-top: 10px;
   font-weight: 200;
+}
+
+div.panel-body {
+  border-top: 1px solid #F0F0F0;
+}
+
+.container.main {
+  max-width: 750px;
+}
+
+.glyphicon { 
+  &:hover{
+    cursor: pointer;
+    text-shadow: 1px 1px grey;
+  } 
 }

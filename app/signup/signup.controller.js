@@ -6,7 +6,7 @@ export default class SignUpCtrl {
     this.call();
   }
 
-  call(){
+  call(){ 
     this.$scope.$on('auth:registration-email-success', (ev, message) => {
       alert("You've successfully registered.")
       this.$location.path('/')
