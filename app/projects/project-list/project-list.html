@@ -1,23 +1,30 @@
 
 <div class="panel-group">
-  <div class="panel panel-default">
-    
-    <div class="panel-heading">
-      <div class="row">
-        <div class="col-md-1"><span class="glyphicon glyphicon-triangle-right"></span></div>
-        <div class="col-md-9">Owesome project name</div>
-        <div class="col-md-2">
-          <span class="glyphicon glyphicon-pencil"></span>
-          <span class="glyphicon glyphicon-trash"></span>
-        </div>
-      </div> 
-    </div>
-  </div>
+  <div ng-repeat="project in projectListCtrl.projects">
+    <br>
 
-  <div class="panel panel-default" ng-repeat="project in projectListCtrl.projects">
-    <div class="panel-heading"> {{project.name}} </div>
-    <div class="panel-body"> here will be tasks </div>
-    <div class="panel-body"> here will be tasks </div>
-    <div class="panel-body"> here will be tasks </div>
+    <div class="panel panel-default" ng-hide="editedProject === project">
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-md-1"><span ng-click="toggleList()" class="glyphicon" ng-class="taskList ? 'glyphicon-triangle-right' : 'glyphicon-triangle-bottom'"></span></div>
+          <div class="col-md-9"> {{project.name}} </div>
+          <div class="col-md-2">
+            <span class="glyphicon glyphicon-pencil" ng-click="startEditing(project)"></span>
+            <span class="glyphicon glyphicon-trash" ng-click="destroy(project)"></span>
+          </div>
+        </div> 
+      </div>
+      <div ng-show="taskList">
+        <div class="panel-body"> here will be tasks </div>
+        <div class="panel-body"> here will be tasks </div>
+      </div>
+    </div>
+
+    <form ng-show="editedProject === project" ng-submit="edit(project, editedProjectName)" class="panel">
+      <input type="text" class="form-control" ng-model="editedProjectName"> 
+      <button type="submit" class="btn btn-info">Save</button>
+      <button type="button" class="btn btn-light" ng-click="cancelEdit()">Cancel</button> 
+    </form>
+
   </div>
 </div>

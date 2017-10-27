@@ -1,6 +1,7 @@
 let addProjectCtrl = ($scope, ProjectsService) => { 'ngInject';
-  $scope.createProject = (text) => {
-    ProjectsService.createProject({ name: text })
+  $scope.create = (text) => {
+    ProjectsService.create({ name: text })
+    $scope.projectName = '' // TODO -> clear on success
   }
 }
 

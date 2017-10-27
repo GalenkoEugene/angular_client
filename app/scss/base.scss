@@ -50,3 +50,16 @@ div.panel-body {
     text-shadow: 1px 1px grey;
   } 
 }
+
+.panel{
+  >.panel-heading{
+    background-image: none;
+    &:hover{
+      background-color: #ececec;
+    }
+  }
+}
+
+input.form-control{
+  min-height: 42px;
+}

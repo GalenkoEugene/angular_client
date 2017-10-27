@@ -3,12 +3,19 @@ export default class ProjectsService {
     this.$http = $http
   }
 
-  getProjects() {
+  get() {
     return this.$http.get('/api/v1/projects')
   }
 
-  createProject(project_params) {
-    this.$http.post('/api/v1/projects', project_params)
-    console.log(project_params)
+  create(project_params) {
+    return this.$http.post('/api/v1/projects', project_params)
+  }
+
+  destroy(project_id) {
+    return this.$http.delete(`/api/v1/projects/${project_id}`)
+  }
+
+  edit(project) {
+    return this.$http.put('/api/v1/projects', project)      // TODO
   }
 }
