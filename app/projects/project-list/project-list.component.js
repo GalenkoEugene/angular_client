@@ -1,6 +1,9 @@
-let projectListCtrl = ($scope, ProjectsService) => { 'ngInject';
+let projectListCtrl = ($scope, ProjectsService, flash) => { 'ngInject';
   $scope.destroy = (project) => {
-    ProjectsService.destroy(project.id)
+    ProjectsService.destroy(project.id).then(
+      () => { $scope.projects.splice($scope.projects.indexOf(project), 1) },
+      () => { alert("Can't remove this project") }
+    )
   }
 
   $scope.startEditing = (project) => {
@@ -10,8 +13,10 @@ let projectListCtrl = ($scope, ProjectsService) => { 'ngInject';
 
   $scope.edit = (project, new_name) => {
     project.name = new_name
-    ProjectsService.edit({ project })
-    $scope.cancelEdit() // TODO on success
+    ProjectsService.edit(project).then(
+      () => { $scope.cancelEdit() }, 
+      (errors) => { $scope.showErrors(errors) }
+    )
   }
 
   $scope.cancelEdit = () => {
@@ -19,9 +24,37 @@ let projectListCtrl = ($scope, ProjectsService) => { 'ngInject';
     $scope.editedProject = null    
   }
 
+  $scope.showErrors = (errors) => {
+    alert(errors.data.join(', '))
+    flash('Errors!') // TODO show errors as flash, add err class to form
+  }
+
   $scope.taskList = true;
   $scope.toggleList = () => {
-    $scope.taskList = $scope.taskList === false ? true: false;
+    $scope.taskList = $scope.taskList === false ? true: false
+  }
+
+  $scope.getProjects = () =>{
+    ProjectsService.get().then(
+      (projects) => { $scope.projects = projects.data }
+    )
+  }
+
+  $scope.create = (text) => {
+    ProjectsService.create({ name: text }).then(
+      (response) => { $scope.onSuccess(response) }, 
+      (errors) => { $scope.onError(errors) }
+    )
+
+    $scope.onSuccess = (response) => {
+      $scope.projects.push(response.data)
+      $scope.showForm = false
+      $scope.projectName = ''
+    }
+
+    $scope.onError = (errors) => {
+      console.log(errors.data) // TODO 
+    }
   }
 }
   

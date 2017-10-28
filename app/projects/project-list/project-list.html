@@ -1,14 +1,15 @@
 
-<div class="panel-group">
-  <div ng-repeat="project in projectListCtrl.projects">
+<div class="panel-group" ng-init="getProjects()">
+<h1>{{myText}}</h1>
+  <div ng-repeat="project in projects">
     <br>
 
     <div class="panel panel-default" ng-hide="editedProject === project">
       <div class="panel-heading">
         <div class="row">
-          <div class="col-md-1"><span ng-click="toggleList()" class="glyphicon" ng-class="taskList ? 'glyphicon-triangle-right' : 'glyphicon-triangle-bottom'"></span></div>
-          <div class="col-md-9"> {{project.name}} </div>
-          <div class="col-md-2">
+          <div class="col-md-1 col-sm-1 col-xs-1"><span ng-click="toggleList()" class="glyphicon" ng-class="taskList ? 'glyphicon-triangle-right' : 'glyphicon-triangle-bottom'"></span></div>
+          <div class="col-md-10 col-sm-10 col-xs-10"> {{project.name}} </div>
+          <div class="col-md-1 col-sm-1 col-xs-1">
             <span class="glyphicon glyphicon-pencil" ng-click="startEditing(project)"></span>
             <span class="glyphicon glyphicon-trash" ng-click="destroy(project)"></span>
           </div>
@@ -20,11 +21,23 @@
       </div>
     </div>
 
-    <form ng-show="editedProject === project" ng-submit="edit(project, editedProjectName)" class="panel">
-      <input type="text" class="form-control" ng-model="editedProjectName"> 
+    <form ng-show="editedProject === project" ng-submit="edit(project, editedProjectName)">
+      <div class="form-group form-group">
+        <input type="text" class="form-control" ng-model="editedProjectName" required>
+      </div>
       <button type="submit" class="btn btn-info">Save</button>
       <button type="button" class="btn btn-light" ng-click="cancelEdit()">Cancel</button> 
     </form>
 
   </div>
 </div>
+
+<form ng-submit="create(projectName)">
+  <div class="form-group form-group">
+    <input ng-model="projectName" ng-click="showForm=true" type="text" class="form-control" placeholder="Enter Project Name ...">
+  </div>
+  <div ng-show="showForm">
+    <button type="submit" class="btn btn-info">Create Project</button>
+    <button type="button" class="btn btn-light" ng-click="showForm=false; projectName=''">Cancel</button>
+  </div>
+</form>

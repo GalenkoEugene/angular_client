@@ -11,6 +11,7 @@ import ngCookies from 'angular-cookies'
 import projects from './projects'
 import login from './login'
 import signup from './signup'
+import 'angular-flash/angular-flash.js'
 
 angular.module('TodoList', [
   uirouter,
@@ -19,7 +20,8 @@ angular.module('TodoList', [
   login,
   tokenauth,
   ipCookie,
-  ngCookies
+  ngCookies,
+  'flash'
 ])
 .config(routes)
 .config(configs)

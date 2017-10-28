@@ -48,7 +48,10 @@ div.panel-body {
   &:hover{
     cursor: pointer;
     text-shadow: 1px 1px grey;
-  } 
+  }
+  &.glyphicon-pencil{
+    padding-right: 3px;
+  }
 }
 
 .panel{
@@ -62,4 +65,14 @@ div.panel-body {
 
 input.form-control{
   min-height: 42px;
+}
+
+.panel-heading { 
+  .col-md-10 {
+    padding-left: 1px;
+  }
+
+  .col-md-1{
+    padding-right: 5px;
+  }
 }

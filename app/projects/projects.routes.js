@@ -6,9 +6,6 @@ export default function routes($stateProvider) { 'ngInject';
     resolve: {
       auth: ['$auth',($auth) => { 
         return $auth.validateUser()
-      }],
-      projects: ['ProjectsService', (ProjectsService) => {
-        return ProjectsService.get()
       }]
     }
   });

@@ -16,6 +16,6 @@ export default class ProjectsService {
   }
 
   edit(project) {
-    return this.$http.put('/api/v1/projects', project)      // TODO
+    return this.$http.put(`/api/v1/projects/${project.id}`, { project })
   }
 }
