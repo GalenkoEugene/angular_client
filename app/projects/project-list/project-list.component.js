@@ -29,9 +29,10 @@ let projectListCtrl = ($scope, ProjectsService, flash) => { 'ngInject';
     flash('Errors!') // TODO show errors as flash, add err class to form
   }
 
-  $scope.taskList = true;
-  $scope.toggleList = () => {
-    $scope.taskList = $scope.taskList === false ? true: false
+  $scope.taskList = []
+  $scope.toggleList = (project_id) => {
+    if ($scope.taskList[project_id] === undefined) { $scope.taskList[project_id] = false }
+    $scope.taskList[project_id] = $scope.taskList[project_id] === false ? true: false
   }
 
   $scope.getProjects = () =>{
@@ -53,7 +54,7 @@ let projectListCtrl = ($scope, ProjectsService, flash) => { 'ngInject';
     }
 
     $scope.onError = (errors) => {
-      console.log(errors.data) // TODO 
+      alert(errors.data.name.join(', ')) // TODO 
     }
   }
 }

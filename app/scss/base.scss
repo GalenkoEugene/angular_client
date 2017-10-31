@@ -55,6 +55,17 @@ div.panel-body {
 }
 
 .panel{
+  div.manage-icons {
+    visibility: hidden;
+  }
+ 
+  &:hover { /* hover on project header */
+    div.manage-icons{
+      cursor: pointer;
+      visibility: visible;
+    }
+  }
+
   >.panel-heading{
     background-image: none;
     &:hover{

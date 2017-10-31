@@ -9,6 +9,7 @@ import configs from './app.configs'
 import tokenauth from 'ng-token-auth'
 import ngCookies from 'angular-cookies'
 import projects from './projects'
+import tasks from './tasks'
 import login from './login'
 import signup from './signup'
 import 'angular-flash/angular-flash.js'
@@ -16,6 +17,7 @@ import 'angular-flash/angular-flash.js'
 angular.module('TodoList', [
   uirouter,
   projects,
+  tasks,
   signup,
   login,
   tokenauth,

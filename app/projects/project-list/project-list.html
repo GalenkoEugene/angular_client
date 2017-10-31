@@ -1,26 +1,24 @@
 
 <div class="panel-group" ng-init="getProjects()">
-<h1>{{myText}}</h1>
   <div ng-repeat="project in projects">
     <br>
-
     <div class="panel panel-default" ng-hide="editedProject === project">
       <div class="panel-heading">
         <div class="row">
-          <div class="col-md-1 col-sm-1 col-xs-1"><span ng-click="toggleList()" class="glyphicon" ng-class="taskList ? 'glyphicon-triangle-right' : 'glyphicon-triangle-bottom'"></span></div>
-          <div class="col-md-10 col-sm-10 col-xs-10"> {{project.name}} </div>
           <div class="col-md-1 col-sm-1 col-xs-1">
+            <span ng-click="toggleList(project.id)" class="glyphicon" ng-class="taskList[project.id] ? 'glyphicon-triangle-right' : 'glyphicon-triangle-bottom'"></span>
+          </div>
+          <div class="col-md-10 col-sm-10 col-xs-10"> {{project.name}} </div>
+          <div class="col-md-1 col-sm-1 col-xs-1 manage-icons" ng-hide="taskList[project.id]">
             <span class="glyphicon glyphicon-pencil" ng-click="startEditing(project)"></span>
             <span class="glyphicon glyphicon-trash" ng-click="destroy(project)"></span>
           </div>
-        </div> 
+        </div>
       </div>
-      <div ng-show="taskList">
-        <div class="panel-body"> here will be tasks </div>
-        <div class="panel-body"> here will be tasks </div>
-      </div>
-    </div>
 
+      <task-list ng-if="taskList[project.id]"></task-list>
+    </div>
+    
     <form ng-show="editedProject === project" ng-submit="edit(project, editedProjectName)">
       <div class="form-group form-group">
         <input type="text" class="form-control" ng-model="editedProjectName" required>
@@ -28,7 +26,6 @@
       <button type="submit" class="btn btn-info">Save</button>
       <button type="button" class="btn btn-light" ng-click="cancelEdit()">Cancel</button> 
     </form>
-
   </div>
 </div>
 
