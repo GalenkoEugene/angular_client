@@ -57,6 +57,8 @@ module.exports = {
       add: true
     }),
 
-    new ExtractTextPlugin('style.css')
+    new ExtractTextPlugin('style.css'),
+    
+    new webpack.IgnorePlugin(/\.\/locale$/)
   ]
 }

@@ -9,7 +9,7 @@
             <span ng-click="toggleList(project.id)" class="glyphicon" ng-class="taskList[project.id] ? 'glyphicon-triangle-right' : 'glyphicon-triangle-bottom'"></span>
           </div>
           <div class="col-md-10 col-sm-10 col-xs-10"> {{project.name}} </div>
-          <div class="col-md-1 col-sm-1 col-xs-1 manage-icons" ng-hide="taskList[project.id]">
+          <div class="col-md-1 col-sm-1 col-xs-1 manage-icons project" ng-hide="taskList[project.id]">
             <span class="glyphicon glyphicon-pencil" ng-click="startEditing(project)"></span>
             <span class="glyphicon glyphicon-trash" ng-click="destroy(project)"></span>
           </div>

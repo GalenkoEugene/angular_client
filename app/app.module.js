@@ -23,7 +23,8 @@ angular.module('TodoList', [
   tokenauth,
   ipCookie,
   ngCookies,
-  'flash'
+  'flash',
+  'moment-picker'
 ])
 .config(routes)
 .config(configs)

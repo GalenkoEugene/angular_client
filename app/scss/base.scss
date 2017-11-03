@@ -1,3 +1,6 @@
+$grey-projects-hover: #EBEBEB;
+$grey-tasks-hover: #FAFAFA;
+
 @mixin glyphicon-size {
   font-size: 25px;
 }
@@ -38,6 +41,9 @@ body>div.container {
 
 div.panel-body {
   border-top: 1px solid #F0F0F0;
+  padding: 5px 10px 5px 25px;
+  margin: 0;
+  min-height: 46px;
 }
 
 .container.main {
@@ -54,28 +60,29 @@ div.panel-body {
   }
 }
 
-.panel{
+@mixin hover-icons-elements {
+  cursor: pointer;
+  visibility: visible;
+  transition: 0.5s;
+}
+
+.panel {
+  .panel-body.panel-border-editing {
+    border: 1px solid #8BE0FC;
+  }
+  
   div.manage-icons {
     visibility: hidden;
   }
  
-  &:hover { /* hover on project header */
-    div.manage-icons{
-      cursor: pointer;
-      visibility: visible;
-    }
+  .panel-heading:hover { /* hover on project and task */
+    background-color: $grey-projects-hover;
+    div.manage-icons{ @include hover-icons-elements }
   }
-
-  >.panel-heading{
-    background-image: none;
-    &:hover{
-      background-color: #ececec;
-    }
+  .row.panel-body:hover {
+    background-color: $grey-tasks-hover;
+    div.manage-icons{ @include hover-icons-elements }    
   }
-}
-
-input.form-control{
-  min-height: 42px;
 }
 
 .panel-heading { 
@@ -86,4 +93,27 @@ input.form-control{
   .col-md-1{
     padding-right: 5px;
   }
+}
+
+input {
+  &.as-panel-body {
+    min-height: 35px;
+    display: block;
+    padding: 0;
+    margin: 0;
+    border: 0; 
+    width: 100%;
+  }
+  
+  &.form-control {
+    min-height: 40px;
+  }
+}
+
+.strike {
+  text-decoration: line-through;
+}
+
+.moment-picker { /* fix moment =) */
+  z-index: 1060 !important;
 }
