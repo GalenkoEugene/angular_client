@@ -8,7 +8,7 @@ export default class TaskListCtrl {
 
   getTasks(){
     this.TaskService.get(this.$scope.$parent.project.id).then(
-      (response) => { this.$scope.tasks = response.data },
+      (response) => { this.refreshTasks(response.data) },
       (errors) => { alert(errors) } 
     )
   }
@@ -39,7 +39,7 @@ export default class TaskListCtrl {
 
   toggleTaskStatus(task) {
     this.TaskService.update(this.$scope.$parent.project.id, task).then(
-      (response) => { console.log(response) /* update task status */ },
+      (response) => { this.refreshTasks(success.data) },
       (errors) => { alert(errors.data.name.join(', ')) } 
     )
   }
@@ -61,16 +61,17 @@ export default class TaskListCtrl {
   }
 
   edit(task, editedTaskName) {
-    task.name = editedTaskName
-    this.TaskService.update(this.$scope.$parent.project.id, task).then(
-      success => { this.cancelEdit() },
+    let params = { id: task.id, name: editedTaskName }
+    this.TaskService.update(this.$scope.$parent.project.id, params).then(
+      success => { this.cancelEdit(success.data) },
       errors => { console.log(errors.data.name.join(', ')) }
     )
   }
 
-  cancelEdit() {
+  cancelEdit(data) {
     this.$scope.editedTaskName = ''
-    this.$scope.editedTask = null 
+    this.$scope.editedTask = null
+    this.refreshTasks(data)
   }
 
   setUpDateTime(data, time) {
@@ -78,12 +79,24 @@ export default class TaskListCtrl {
     let params = { id: this.$rootScope.currentTask.id, deadline: fresh_data }
 
     this.TaskService.update(this.$scope.$parent.project.id, params).then(
-      success => { this.setUpNewDate(fresh_data) },
+      success => { this.refreshTasks(success.data) },
       errors => { console.log(errors.data.name.join(', ')) }
     )
   }
 
-  setUpNewDate(fresh_data) { 
-    this.$rootScope.currentTask.deadline = fresh_data
+  isOverdue(deadline) {
+    return moment(deadline) < moment(new Date()).add(1,'days')._d
+  }
+
+  move(task, direction) {
+    let params = { id: task.id, move: direction }
+    this.TaskService.update(this.$scope.$parent.project.id, params).then(
+      success => { this.refreshTasks(success.data) },
+      errors => { console.log(errors.data.name.join(', ')) }
+    )
+  }
+
+  refreshTasks(data) {
+    this.$scope.tasks = data
   }
 }

@@ -41,7 +41,7 @@ body>div.container {
 
 div.panel-body {
   border-top: 1px solid #F0F0F0;
-  padding: 5px 10px 5px 25px;
+  padding: 5px 10px 5px 10px;
   margin: 0;
   min-height: 46px;
 }
@@ -71,7 +71,7 @@ div.panel-body {
     border: 1px solid #8BE0FC;
   }
   
-  div.manage-icons {
+  .manage-icons, .prioritizer {
     visibility: hidden;
   }
  
@@ -81,7 +81,7 @@ div.panel-body {
   }
   .row.panel-body:hover {
     background-color: $grey-tasks-hover;
-    div.manage-icons{ @include hover-icons-elements }    
+    .manage-icons, .prioritizer{ @include hover-icons-elements }
   }
 }
 
@@ -116,4 +116,22 @@ input {
 
 .moment-picker { /* fix moment =) */
   z-index: 1060 !important;
+}
+
+div.col-md-1.col-sm-1.col-xs-1.left-manager {
+  padding-left: 0px;
+  padding-right: 5px;
+
+  >.prioritizer {
+    width: 40%;
+    float:left;
+    margin-right: 5%;
+    padding-left: 5%
+  }
+
+  >.striker {
+    width: 50%;
+    float:right;
+    text-align: center;
+  }
 }
