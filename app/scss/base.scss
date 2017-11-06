@@ -1,5 +1,6 @@
 $grey-projects-hover: #EBEBEB;
 $grey-tasks-hover: #FAFAFA;
+$grey-icons: #919191;
 
 @mixin glyphicon-size {
   font-size: 25px;
@@ -51,6 +52,7 @@ div.panel-body {
 }
 
 .glyphicon { 
+  color: $grey-icons;
   &:hover{
     cursor: pointer;
     text-shadow: 1px 1px grey;
@@ -134,4 +136,28 @@ div.col-md-1.col-sm-1.col-xs-1.left-manager {
     float:right;
     text-align: center;
   }
+}
+
+.modal-footer.buttons {
+  border-top: none!important;
+}
+
+textarea {
+   resize: none;
+}
+
+.file-uploader-icon {
+  position: relative;
+  float: right;
+  right: 10px;
+  bottom: 30px;
+  .fa {
+    color: $grey-icons;
+    cursor: pointer;
+  }
+}
+
+.modal.in {
+   display:block;
+   overflow-y:auto;
 }

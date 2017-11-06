@@ -16,12 +16,13 @@
       <small class="text-muted" ng-class="vm.isOverdue(task.deadline) ? 'text-danger' : 'text-success'">{{task.deadline | date:'dd/MM/yyyy HH:mm':'UTC'}}</small>
     </div>
     <div class="col-md-2 col-sm-2 col-xs-2 manage-icons task">
-      <span class="glyphicon glyphicon-comment" ng-click="vm.addComments()"></span>
+      <span class="glyphicon glyphicon-comment" ng-click="modalIsOn[task.id] = true"></span>
       <span class="glyphicon glyphicon-time" data-toggle="modal" data-target="#myModal" ng-click="vm.openPicker(task)"></span>
       <span class="glyphicon glyphicon-pencil" ng-click="vm.startEditing(task)"></span>
       <span class="glyphicon glyphicon-trash" ng-click="vm.destroy(task)"></span>
     </div>
   </div>
+  <comment-tag task="task" ng-if="modalIsOn[task.id] === true"></comment-tag>
   
   <form ng-show="editedTask === task" ng-submit="vm.edit(task, editedTaskName)">
     <div class="panel-body panel-border-editing">
@@ -34,7 +35,7 @@
     </div>
     <div class="panel-body">
       <button type="submit" class="btn btn-info">Save</button>
-      <button type="button" class="btn btn-light" ng-click="vm.cancelEdit()">Cancel</button>
+      <button type="button" class="btn btn-light" ng-click="vm.cancelEdit(false)">Cancel</button>
     </div>
   </form>
 </div>
@@ -48,7 +49,6 @@
     <button type="button" class="btn btn-light" ng-click="showForm=false; taskName=''">Cancel</button>
   </div>
 </form>
-
 
 <!-- Data Picker Modal -->
 <div class="modal fade" id="myModal" role="dialog">

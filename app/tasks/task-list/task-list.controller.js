@@ -4,6 +4,7 @@ export default class TaskListCtrl {
     this.$rootScope = $rootScope
     this.$scope.moment = new moment()
     this.TaskService = TaskService
+    this.modalIsOn = []
   }
 
   getTasks(){
@@ -71,7 +72,7 @@ export default class TaskListCtrl {
   cancelEdit(data) {
     this.$scope.editedTaskName = ''
     this.$scope.editedTask = null
-    this.refreshTasks(data)
+    if(data) { this.refreshTasks(data) }
   }
 
   setUpDateTime(data, time) {

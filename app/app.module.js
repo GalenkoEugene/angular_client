@@ -12,9 +12,14 @@ import projects from './projects'
 import tasks from './tasks'
 import login from './login'
 import signup from './signup'
+import comments from './comments'
 import 'angular-flash/angular-flash.js'
+import ngFileUpload from 'ng-file-upload'
 
 angular.module('TodoList', [
+  'flash',
+  'moment-picker',
+  ngFileUpload,
   uirouter,
   projects,
   tasks,
@@ -23,8 +28,7 @@ angular.module('TodoList', [
   tokenauth,
   ipCookie,
   ngCookies,
-  'flash',
-  'moment-picker'
+  comments
 ])
 .config(routes)
 .config(configs)

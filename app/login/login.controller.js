@@ -10,7 +10,6 @@ export default class LoginCtrl {
   }
 
   call(){
-    
     this.$rootScope.$on('auth:login-success', (ev, user) => {
       alert(`Welcome ${user.email}`);
       this.$location.path('/');

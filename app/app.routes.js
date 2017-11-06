@@ -1,3 +1,3 @@
 export default function routes($urlRouterProvider) { 'ngInject';
-  $urlRouterProvider.otherwise('/login');
+  $urlRouterProvider.otherwise('/');
 }

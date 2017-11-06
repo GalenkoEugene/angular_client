@@ -31,8 +31,7 @@ let projectListCtrl = ($scope, ProjectsService, flash) => { 'ngInject';
 
   $scope.taskList = []
   $scope.toggleList = (project_id) => {
-    if ($scope.taskList[project_id] === undefined) { $scope.taskList[project_id] = false }
-    $scope.taskList[project_id] = $scope.taskList[project_id] === false ? true: false
+    $scope.taskList[project_id] = !$scope.taskList[project_id]
   }
 
   $scope.getProjects = () =>{

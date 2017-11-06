@@ -1,5 +1,4 @@
 export default class TaskService {
-  
   constructor($http) { 'ngInject';
     this.$http = $http
   }
