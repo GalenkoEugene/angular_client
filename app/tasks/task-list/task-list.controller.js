@@ -1,10 +1,12 @@
 export default class TaskListCtrl {
-  constructor($scope, TaskService, $rootScope) { 'ngInject';
+  constructor($scope, TaskService, $rootScope, Flash, $window) { 'ngInject';
     this.$scope = $scope
     this.$rootScope = $rootScope
     this.$scope.moment = new moment()
     this.TaskService = TaskService
     this.modalIsOn = []
+    this.Flash = Flash
+    this.$window = $window
   }
 
   getTasks(){
@@ -28,7 +30,7 @@ export default class TaskListCtrl {
   create(task_name) {
     this.TaskService.create(this.$scope.$parent.project.id, task_name).then(
       (response) => { this.onSuccess(response) },
-      (errors) => { alert(errors.data.name.join(', ')) }
+      (errors) => { alert(errors.data.join(', ')) }
     )
   }
   
@@ -40,15 +42,15 @@ export default class TaskListCtrl {
 
   toggleTaskStatus(task) {
     this.TaskService.update(this.$scope.$parent.project.id, task).then(
-      (response) => { this.refreshTasks(success.data) },
-      (errors) => { alert(errors.data.name.join(', ')) } 
+      (response) => { this.refreshTasks(response.data) },
+      (errors) => { task.done = !task.done; this.Flash.create('danger', errors.data.join(', ')) }
     )
   }
 
   destroy(task) {
     this.TaskService.destroy(this.$scope.$parent.project.id, task.id).then(
       response => { this.removeLocaly(task) },
-      errors => { alert(errors.data.name.join(', ')) }
+      errors => { this.Flash.create('danger', errors.data.join(', ')) }
     )
   }
 
@@ -65,7 +67,7 @@ export default class TaskListCtrl {
     let params = { id: task.id, name: editedTaskName }
     this.TaskService.update(this.$scope.$parent.project.id, params).then(
       success => { this.cancelEdit(success.data) },
-      errors => { console.log(errors.data.name.join(', ')) }
+      errors => { this.Flash.create('danger', errors.data.join(', ')) }
     )
   }
 
@@ -81,7 +83,7 @@ export default class TaskListCtrl {
 
     this.TaskService.update(this.$scope.$parent.project.id, params).then(
       success => { this.refreshTasks(success.data) },
-      errors => { console.log(errors.data.name.join(', ')) }
+      errors => { this.Flash.create('danger', errors.data.join(', ')) }
     )
   }
 
@@ -93,11 +95,20 @@ export default class TaskListCtrl {
     let params = { id: task.id, move: direction }
     this.TaskService.update(this.$scope.$parent.project.id, params).then(
       success => { this.refreshTasks(success.data) },
-      errors => { console.log(errors.data.name.join(', ')) }
+      errors => { console.log(errors.data.join(', ')) }
     )
   }
 
   refreshTasks(data) {
+    if(!(data.map(task => task.done).includes(false))) {
+      this.Flash.create('success', 'Well Done! You’re successfully completed all the task.')
+    }
     this.$scope.tasks = data
+  }
+
+  confirmDestroy(task) {
+    if (this.$window.confirm(`Are you sure you want to delete "${task.name}"?`)) {
+      this.destroy(task)
+    }
   }
 }

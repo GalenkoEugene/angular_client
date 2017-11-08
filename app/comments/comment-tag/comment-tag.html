@@ -9,7 +9,8 @@
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <textarea ng-model="newComment.body" class="form-control" rows="4" name="body" minlength="10" maxlength="256" rows="3" placeholder=" Enter Your Comment" required></textarea>
+        <div ng-show="errors" class="text-danger">{{errors}}</div>
+          <textarea ng-model="newComment.body" class="form-control" rows="4" name="body" maxlength="256" rows="3" placeholder=" Enter Your Comment" required></textarea>
           <div class="file-uploader-icon">
             <label for="uplodImage">
               <i class="fa fa-paperclip fa-lg" aria-hidden="true"></i>
@@ -20,19 +21,23 @@
       </div> 
 
       <div class="modal-footer buttons">
-        <button class="btn btn-lg btn-info" data-dismiss="modal" ng-click="vm.storeComment(newComment)"> Save </button>
-        <button class="btn btn-lg" data-dismiss="modal" ng-click="vm.closeModal()"> Cancel </button>
+        <button class="btn btn-lg btn-info" ng-disabled="newComment.body.length < 5" ng-click="vm.storeComment(newComment)"> Save </button>
+        <button class="btn btn-lg" ng-click="vm.closeModal()"> Cancel </button>
       </div>
       <div class="modal-footer" class="pull-left">
+        <div ng-show="fiteWithError" class="text-danger">
+          <p>“Wrong file format. You can upload a *.jpg or *.png formats files only”</p>
+          <p>“An uploaded file is too large. The size shouldn’t exceed 10 MB.”</p>
+        </div>
         <!-- preview strat -->
         <div class="media-left" ng-if="newComment.body || newComment.file">
           <div class="media-left">
             <small>preview: &nbsp;&nbsp;&nbsp;&nbsp;</small>
-            <span class="glyphicon glyphicon-trash" ng-click="newComment.file = null"></span>
+            <span class="glyphicon glyphicon-trash" ng-click="newComment.file=null; newComment.body=null"></span>
           </div>
           <div class="pull-left">{{newComment.body}}</div>
           <div ng-show="newComment.file" class="image-preview">
-            <img ngf-thumbnail="newComment.file" class="thumb img-rounded">
+            <img ngf-thumbnail="newComment.file" class="thumb img-rounded" width="250" height="250">
           </div>
         </div>
         <!-- preview end -->

@@ -51,7 +51,7 @@ div.panel-body {
   max-width: 750px;
 }
 
-.glyphicon { 
+.glyphicon {
   color: $grey-icons;
   &:hover{
     cursor: pointer;
@@ -76,6 +76,12 @@ div.panel-body {
   .manage-icons, .prioritizer {
     visibility: hidden;
   }
+
+  .manage-icons {
+    span.glyphicon { margin: 2px }
+    padding-left: 5px;
+    padding-right: 10px;
+    }
  
   .panel-heading:hover { /* hover on project and task */
     background-color: $grey-projects-hover;
@@ -87,7 +93,7 @@ div.panel-body {
   }
 }
 
-.panel-heading { 
+.panel-heading {
   .col-md-10 {
     padding-left: 1px;
   }
@@ -138,8 +144,11 @@ div.col-md-1.col-sm-1.col-xs-1.left-manager {
   }
 }
 
-.modal-footer.buttons {
-  border-top: none!important;
+.modal-footer {
+  text-align: left!important;
+  &.buttons {
+    border-top: none!important;
+  }
 }
 
 textarea {
@@ -160,4 +169,19 @@ textarea {
 .modal.in {
    display:block;
    overflow-y:auto;
+}
+
+a {
+  cursor: pointer;
+}
+
+.navbar-brand {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    text-align: center;
+    margin:0 auto;
+}
+.navbar-toggle {
+    z-index:3;
 }

@@ -3,13 +3,13 @@
   <div class="panel-body">
 
     <!-- sign in form -->
-    <form class="form-group form-group-lg" ng-submit="submitLogin(loginForm)" role="form" ng-init="loginForm = {}">
+    <form class="form-group form-group-lg" ng-class="{'has-error': hasError}" ng-submit="submitLogin(loginForm)" role="form" ng-init="loginForm = {}">
+      <br>
+      <span ng-show="hasError" class="text-danger">Incorrect login or(and) password</span>
       <div class="form-group">
-        <label for="email">Email address</label>
         <input type="email" class="form-control" id="email" ng-model="loginForm.email" placeholder="Email">
       </div>
       <div class="form-group">
-        <label for="password">Password</label>
         <input type="password" class="form-control" id="password" ng-model="loginForm.password" placeholder="Password">
       </div>
       <button type="submit" class="btn btn-info btn-lg">Sign In</button>

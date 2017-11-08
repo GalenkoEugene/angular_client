@@ -1,7 +1,7 @@
 <span ng-init="vm.getTasks()"></span>
 <div ng-repeat="task in tasks | orderBy:'position'">
 
-  <div class="row panel-body align-baseline" ng-hide="editedTask === task">
+  <div class="row panel-body" ng-hide="editedTask === task">
     <div class="col-md-1 col-sm-1 col-xs-1 left-manager">
       <div class="prioritizer">
         <span ng-click="vm.move(task, 'up')" class="glyphicon glyphicon-arrow-up"></span>
@@ -16,10 +16,11 @@
       <small class="text-muted" ng-class="vm.isOverdue(task.deadline) ? 'text-danger' : 'text-success'">{{task.deadline | date:'dd/MM/yyyy HH:mm':'UTC'}}</small>
     </div>
     <div class="col-md-2 col-sm-2 col-xs-2 manage-icons task">
+      <span ng-show="task.comments_count > 0" ng-click="modalIsOn[task.id] = true">{{ task.comments_count }}</span>
       <span class="glyphicon glyphicon-comment" ng-click="modalIsOn[task.id] = true"></span>
       <span class="glyphicon glyphicon-time" data-toggle="modal" data-target="#myModal" ng-click="vm.openPicker(task)"></span>
       <span class="glyphicon glyphicon-pencil" ng-click="vm.startEditing(task)"></span>
-      <span class="glyphicon glyphicon-trash" ng-click="vm.destroy(task)"></span>
+      <span class="glyphicon glyphicon-trash" ng-click="vm.confirmDestroy(task)"></span>
     </div>
   </div>
   <comment-tag task="task" ng-if="modalIsOn[task.id] === true"></comment-tag>

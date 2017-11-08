@@ -9,25 +9,30 @@
   <script src="//cdn.rawgit.com/indrimuska/angular-moment-picker/master/dist/angular-moment-picker.js"></script>
   <link href="//cdn.rawgit.com/indrimuska/angular-moment-picker/master/dist/angular-moment-picker.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!-- <script src="ng-file-upload-shim.min.js"></script> -->
-  <!-- <script src="ng-file-upload.min.js"></script> -->
+  <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.7.1/loading-bar.min.css' type='text/css' media='all' />
+  <script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.7.1/loading-bar.min.js'></script>
 </head>
 <body>
-  <flash-message duration="5000" show-close="true"></flash-message>  <!-- on-dismiss="myCallback(flash)" -->
-
   <!-- Fixed navbar -->
-  <nav class="navbar navbar-default navbar-fixed-top">
+  <nav class="navbar navbar-default" role="navigation">
     <div class="container">
-      <a class="navbar-brand" href="#">Ruby Garage</a>
-        Simple ToDo List
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#" ng-click="signOut()" ng-if="user.signedIn"><span class="glyphicon glyphicon-log-out"></span></a></li>
-        <li><a href="#!/login" ng-if="!user.signedIn"><span class="glyphicon glyphicon-log-in"></span></a></li>
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#!/"><strong>Simple ToDo List</strong></a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-left">
+          <li><a><img src="app/images/logo.png" width="120" height="40"/></a></li>
       </ul>
+      <ul class="nav navbar-nav navbar-right">
+          <li><a href="#" ng-click="signOut()" ng-if="user.signedIn"><span class="glyphicon glyphicon-log-out"></span></a></li>
+          <li><a href="#!/login" ng-if="!user.signedIn"><span class="glyphicon glyphicon-log-in"></span></a></li>
+      </ul>
+    </div>
     </div>
   </nav>
 
   <div class="main container">
+    <flash-message duration="5000" show-close="true"></flash-message>
     <div ui-view></div>
   </div>
 </body>

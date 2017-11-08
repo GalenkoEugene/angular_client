@@ -5,6 +5,8 @@ export default class CommentTagCtrl {
     this.$scope.newComment = {}
     this.Upload = Upload
     this.$scope.comments = []
+    this.$scope.fiteWithError = false
+    this.$scope.errors = ''
     this.$window = $window
   }
 
@@ -32,9 +34,20 @@ export default class CommentTagCtrl {
 
   create(text, base64url) {
     this.CommentService.create(this.task.project_id, this.task.id, {body: text, attachment: base64url}).then(
-      success => { this.closeModal(success) },
-      errors => { console.log(errors) }
+      success => { this.increaseLocaly() },
+      errors => { this.showErrors(errors) }
     )
+  }
+
+  showErrors(errors) {
+    if (errors.data.body) { this.$scope.errors = errors.data.body.join(', ') }
+    if (errors.data.attachment) { this.$scope.fiteWithError = true }
+    console.log(errors.data)
+  }
+
+  increaseLocaly() {
+    this.task.comments_count = this.task.comments_count+1
+    this.closeModal()
   }
 
   closeModal() {
@@ -54,5 +67,6 @@ export default class CommentTagCtrl {
 
   removeLocaly(comment) {
     this.$scope.comments.splice(this.$scope.comments.indexOf(comment), 1)
+    this.task.comments_count = this.task.comments_count-1
   }
 }

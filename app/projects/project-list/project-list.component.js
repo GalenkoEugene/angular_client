@@ -1,9 +1,16 @@
-let projectListCtrl = ($scope, ProjectsService, flash) => { 'ngInject';
+let projectListCtrl = ($scope, ProjectsService, Flash, $window) => { 'ngInject';
   $scope.destroy = (project) => {
+    console.log('try to destroy')
     ProjectsService.destroy(project.id).then(
       () => { $scope.projects.splice($scope.projects.indexOf(project), 1) },
-      () => { alert("Can't remove this project") }
+      () => { Flash.create('danger', `Can't remove this project the reason is: ${errors.data.name.join(', ')}`) }
     )
+  }
+
+  $scope.confirmDestroy = (project) => {
+    if ($window.confirm(`Are you sure you want to delete "${project.name}"?`)) {
+      $scope.destroy(project)
+    }
   }
 
   $scope.startEditing = (project) => {
@@ -15,18 +22,13 @@ let projectListCtrl = ($scope, ProjectsService, flash) => { 'ngInject';
     project.name = new_name
     ProjectsService.edit(project).then(
       () => { $scope.cancelEdit() }, 
-      (errors) => { $scope.showErrors(errors) }
+      (errors) => { Flash.create('danger', errors.data.name.join(', ')) }
     )
   }
 
   $scope.cancelEdit = () => {
     $scope.editedProjectName = ''
     $scope.editedProject = null    
-  }
-
-  $scope.showErrors = (errors) => {
-    alert(errors.data.join(', '))
-    flash('Errors!') // TODO show errors as flash, add err class to form
   }
 
   $scope.taskList = []
@@ -41,19 +43,15 @@ let projectListCtrl = ($scope, ProjectsService, flash) => { 'ngInject';
   }
 
   $scope.create = (text) => {
-    ProjectsService.create({ name: text }).then(
+    ProjectsService.create({ name: text || '' }).then(
       (response) => { $scope.onSuccess(response) }, 
-      (errors) => { $scope.onError(errors) }
+      (errors) => { Flash.create('danger', errors.data.name.join(', ')) }
     )
 
     $scope.onSuccess = (response) => {
       $scope.projects.push(response.data)
       $scope.showForm = false
       $scope.projectName = ''
-    }
-
-    $scope.onError = (errors) => {
-      alert(errors.data.name.join(', ')) // TODO 
     }
   }
 }

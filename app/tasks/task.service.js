@@ -8,7 +8,7 @@ export default class TaskService {
   }
 
   create(project_id, task_name) {
-    return this.$http.post(`/api/v1/projects/${project_id}/tasks`, { project_id: `${project_id}`, name: task_name })
+    return this.$http.post(`/api/v1/projects/${project_id}/tasks`, { project_id: project_id, name: task_name })
   }
 
   destroy(project_id, task_id) {

@@ -4,8 +4,10 @@ export default function routes($stateProvider) { 'ngInject';
     url: '/',
     template: require('./projects.html'),
     resolve: {
-      auth: ['$auth',($auth) => { 
-        return $auth.validateUser()
+      auth: ['$auth', '$state',($auth, $state) => {
+        return $auth.validateUser().catch(function(err){
+                $state.go('login');
+              })
       }]
     }
   });
