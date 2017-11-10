@@ -1,8 +1,8 @@
 export default class SignUpCtrl {
   constructor($auth, $cookies, $location, $scope, Flash) { 'ngInject';
-    this.$cookies = $cookies;
-    this.$location = $location;
-    this.$scope = $scope;
+    this.$cookies = $cookies
+    this.$location = $location
+    this.$scope = $scope
     this.Flash = Flash
     this.$scope.hasError = false
     this.call();
@@ -11,8 +11,8 @@ export default class SignUpCtrl {
   call(){ 
     this.$scope.$on('auth:registration-email-success', (ev, message) => {
       this.$scope.hasError = false
-      this.Flash.create('success', 'You’re successfully registered!')
       this.$location.path('/')
+      this.Flash.create('success', 'You’re successfully registered!')
     });
 
     this.$scope.$on('auth:registration-email-error', (ev, reason) => {

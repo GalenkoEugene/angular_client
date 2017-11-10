@@ -68,6 +68,7 @@
                    ng-model="ctrl.datepickerData"
                    ng-model-options="{ updateOn: 'blur' }"
                    moment-picker="$root.actual_data"
+                   min-date="vm.mindate"
                    start-view="month"
                    max-view="month"
                    today="true"
@@ -82,6 +83,7 @@
                    moment-picker="$root.actual_time"
                    start-view="day"
                    max-view="day"
+                   min-date="vm.mindate"
                    format="HH:mm">
           </div>
         </div><br>

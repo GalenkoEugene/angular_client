@@ -7,6 +7,7 @@ export default class TaskListCtrl {
     this.modalIsOn = []
     this.Flash = Flash
     this.$window = $window
+    this.mindate = moment().subtract(1, 'day').format('DD/MM/YYYY');
   }
 
   getTasks(){
