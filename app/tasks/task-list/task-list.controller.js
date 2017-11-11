@@ -101,7 +101,7 @@ export default class TaskListCtrl {
   }
 
   refreshTasks(data) {
-    if(!(data.map(task => task.done).includes(false))) {
+    if((data.length > 0) && !(data.map(task => task.done).includes(false))) {
       this.Flash.create('success', 'Well Done! You’re successfully completed all the task.')
     }
     this.$scope.tasks = data

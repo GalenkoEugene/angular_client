@@ -2,6 +2,7 @@ const path = require("path");
 const webpack = require("webpack");
 const ngAnnotatePlugin = require('ng-annotate-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   entry: "./app/app.module.js",
@@ -38,15 +39,6 @@ module.exports = {
 
   devtool: "#inline-source-map",
 
-  devServer: {
-    proxy: {
-      "/api/*": {
-        target: "http://localhost:3000",
-        secure: false
-      }
-    }
-  },
-
   plugins: [
     new webpack.ProvidePlugin({
       $: "jquery",
@@ -59,6 +51,11 @@ module.exports = {
 
     new ExtractTextPlugin('style.css'),
     
-    new webpack.IgnorePlugin(/\.\/locale$/)
+    new webpack.IgnorePlugin(/\.\/locale$/),
+
+    new Dotenv({
+      path: './.env',
+      safe: true
+    })
   ]
 }

@@ -2,7 +2,7 @@ export default function configs($authProvider, $qProvider) { 'ngInject';
   $qProvider.errorOnUnhandledRejections(false);
 
   $authProvider.configure({
-    apiUrl:                  '/api/v1',
+    apiUrl:                  `${process.env.API_URL}/api/v1`,
     tokenValidationPath:     '/auth/validate_token',
     signOutUrl:              '/auth/sign_out',
     emailRegistrationPath:   '/auth',
@@ -13,11 +13,9 @@ export default function configs($authProvider, $qProvider) { 'ngInject';
     passwordUpdatePath:      '/auth/password',
     passwordResetSuccessUrl: window.location.href,
     emailSignInPath:         '/auth/sign_in',
-    storage:                 'cookies',
+    storage:                 'localStorage',
     forceValidateToken:      false,
     validateOnPageLoad:      true,
-    proxyIf:                 function() { return false; },
-    proxyUrl:                '/proxy',
     omniauthWindowType: 'sameWindow',
     tokenFormat: {
       "access-token": "{{ token }}",
@@ -31,7 +29,7 @@ export default function configs($authProvider, $qProvider) { 'ngInject';
       expires: 9999,
       expirationUnit: 'days',
       secure: false,
-      domain: 'localhost'
+      domain: process.env.DOMAIN
     },
     createPopup: function(url) {
       return window.open(url, '_blank', 'closebuttoncaption=Cancel');
