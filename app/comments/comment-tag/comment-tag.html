@@ -1,0 +1,67 @@
+<!-- Modal -->
+<div ng-init="vm.getComments()" class="modal fade in" role="dialog">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" ng-click="vm.closeModal()">&times;</button>
+        <h4 class="modal-title">Add Comment</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+        <div ng-show="errors" class="text-danger">{{errors}}</div>
+          <textarea ng-model="newComment.body" class="form-control" rows="4" name="body" maxlength="256" rows="3" placeholder=" Enter Your Comment" required></textarea>
+          <div class="file-uploader-icon">
+            <label for="uplodImage">
+              <i class="fa fa-paperclip fa-lg" aria-hidden="true"></i>
+            </label>               
+            <input id="uplodImage" ngf-select ng-model="newComment.file" name="file" type="file" ngf-max-size="10MB" accept="image/jpeg,image/jpg,image/png" class="ng-hide">                 
+          </div>
+        </div>
+      </div> 
+
+      <div class="modal-footer buttons">
+        <button class="btn btn-lg btn-info" ng-disabled="newComment.body.length < 5" ng-click="vm.storeComment(newComment)"> Save </button>
+        <button class="btn btn-lg" ng-click="vm.closeModal()"> Cancel </button>
+      </div>
+      <div class="modal-footer" class="pull-left">
+        <div ng-show="fiteWithError" class="text-danger">
+          <p>“Wrong file format. You can upload a *.jpg or *.png formats files only”</p>
+          <p>“An uploaded file is too large. The size shouldn’t exceed 10 MB.”</p>
+        </div>
+        <!-- preview strat -->
+        <div class="media-left" ng-if="newComment.body || newComment.file">
+          <div class="media-left">
+            <small>preview: &nbsp;&nbsp;&nbsp;&nbsp;</small>
+            <span class="glyphicon glyphicon-trash" ng-click="newComment.file=null; newComment.body=null"></span>
+          </div>
+          <div class="pull-left">{{newComment.body}}</div>
+          <div ng-show="newComment.file" class="image-preview">
+            <img ngf-thumbnail="newComment.file" class="thumb img-rounded" width="250" height="250">
+          </div>
+        </div>
+        <!-- preview end -->
+
+        <div ng-repeat="comment in comments">    
+          <div class="media-left">
+            <div class="media-left">
+              <p>
+                <small>{{comment.created_at | date:'dd/MM/yyyy':'UTC'}}</small>
+                <span class="glyphicon glyphicon-trash" ng-click="vm.destroy(comment)"></span>
+              </p>            
+            </div>
+            <div class="pull-left">{{comment.body}}</div>
+            <div>
+              <a role="link" ng-click="vm.popitup(comment.attachment.url, '_blank')">
+                <img ng-src="{{comment.attachment.thumb.url}}">
+              </a>
+            </div>
+          </div>
+          <br>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-backdrop fade in"></div>

@@ -1,0 +1,20 @@
+<div class="panel panel-default form-block" ng-if="!user.signedIn">
+  <div class="panel-heading">Sign In</div>
+  <div class="panel-body">
+
+    <!-- sign in form -->
+    <form class="form-group form-group-lg" ng-class="{'has-error': hasError}" ng-submit="submitLogin(loginForm)" role="form" ng-init="loginForm = {}">
+      <br>
+      <span ng-show="hasError" class="text-danger">Incorrect login or(and) password</span>
+      <div class="form-group">
+        <input type="email" class="form-control" id="email" ng-model="loginForm.email" placeholder="Email">
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" id="password" ng-model="loginForm.password" placeholder="Password">
+      </div>
+      <button type="submit" class="btn btn-info btn-lg">Sign In</button>
+      <p class="form-helper">Don't have an account? <a href="#!/signup">Sign Up</a> </p>
+    </form>
+
+  </div>
+</div>
